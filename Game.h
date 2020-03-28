@@ -15,4 +15,5 @@ private:
 	Paddle* paddleLeft;
 	Paddle* paddleRight;
 	sf::Clock clock;
+	bool gameFinished;
 };

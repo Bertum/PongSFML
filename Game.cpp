@@ -2,9 +2,10 @@
 
 Game::Game() {
 	window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Pong");
-	paddleLeft = new Paddle(&window, 50);
-	paddleRight = new Paddle(&window, SCREEN_WIDTH - 50);
+	paddleLeft = new Paddle(&window, 50, sf::Keyboard::W, sf::Keyboard::S);
+	paddleRight = new Paddle(&window, SCREEN_WIDTH - 50, sf::Keyboard::Up, sf::Keyboard::Down);
 	ball = new Ball(&window);
+	gameFinished = false;
 	Run();
 }
 
@@ -22,9 +23,12 @@ void Game::Run() {
 		}
 
 		window.clear();
-		paddleLeft->Update(deltaTime);
-		paddleRight->Update(deltaTime);
-		ball->Update(deltaTime);
-		window.display();
+
+		if (!gameFinished) {
+			paddleLeft->Update(deltaTime);
+			paddleRight->Update(deltaTime);
+			ball->Update(deltaTime);
+			window.display();
+		}
 	}
 }

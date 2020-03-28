@@ -9,3 +9,20 @@ Ball::Ball(sf::RenderWindow* renderWindow) : window(renderWindow) {
 void Ball::Update(float deltaTime) {
 	window->draw(*circleShape);
 }
+
+void Ball::Move(float deltaTime) {
+
+}
+
+void Ball::CheckOutOfScreen() {
+	if (circleShape->getPosition().x - circleShape->getRadius() < 0.f)
+	{
+	}
+	if (circleShape->getPosition().x + circleShape->getRadius() > SCREEN_WIDTH)
+	{
+	}
+}
+
+void Ball::ResetBall() {
+
+}

@@ -10,4 +10,7 @@ public:
 private:
 	sf::CircleShape* circleShape;
 	sf::RenderWindow* window;
+	void Move(float deltaTime);
+	void CheckOutOfScreen();
+	void ResetBall();
 };
