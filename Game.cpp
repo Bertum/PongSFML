@@ -27,7 +27,7 @@ void Game::Run() {
 		if (!gameFinished) {
 			paddleLeft->Update(deltaTime);
 			paddleRight->Update(deltaTime);
-			ball->Update(deltaTime);
+			ball->Update(deltaTime, paddleLeft, paddleRight);
 			window.display();
 		}
 	}
