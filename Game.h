@@ -3,6 +3,7 @@
 #include "DEFINITIONS.h"
 #include "Ball.h"
 #include "Paddle.h"
+#include "Hud.h"
 
 class Game
 {
@@ -14,6 +15,7 @@ private:
 	Ball* ball;
 	Paddle* paddleLeft;
 	Paddle* paddleRight;
+	Hud* hud;
 	sf::Clock clock;
 	bool gameFinished;
 };

@@ -8,27 +8,27 @@ Ball::Ball(sf::RenderWindow* renderWindow) : window(renderWindow) {
 	ResetBall();
 }
 
-void Ball::Update(float deltaTime, Paddle* paddleLeft, Paddle* paddleRight) {
+void Ball::Update(float deltaTime, Paddle* paddleLeft, Paddle* paddleRight, Hud* hud) {
 	window->draw(*circleShape);
 	Move(deltaTime);
 	CheckCollisions(paddleLeft);
 	CheckCollisions(paddleRight);
-	CheckOutOfScreen();
+	CheckOutOfScreen(hud);
 }
 
 void Ball::Move(float deltaTime) {
 	circleShape->move(deltaTime * speed.x, deltaTime * speed.y);
 }
 
-void Ball::CheckOutOfScreen() {
+void Ball::CheckOutOfScreen(Hud* hud) {
 	if (circleShape->getPosition().x - circleShape->getRadius() < 0.f)
 	{
-		//Sum points right player
+		hud->scoreRight++;
 		ResetBall();
 	}
 	if (circleShape->getPosition().x + circleShape->getRadius() > SCREEN_WIDTH)
 	{
-		//Sum points left player
+		hud->scoreLeft++;
 		ResetBall();
 	}
 }

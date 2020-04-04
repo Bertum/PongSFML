@@ -5,6 +5,7 @@ Game::Game() {
 	paddleLeft = new Paddle(&window, 50, sf::Keyboard::W, sf::Keyboard::S);
 	paddleRight = new Paddle(&window, SCREEN_WIDTH - 50, sf::Keyboard::Up, sf::Keyboard::Down);
 	ball = new Ball(&window);
+	hud = new Hud(&window);
 	gameFinished = false;
 	Run();
 }
@@ -27,7 +28,8 @@ void Game::Run() {
 		if (!gameFinished) {
 			paddleLeft->Update(deltaTime);
 			paddleRight->Update(deltaTime);
-			ball->Update(deltaTime, paddleLeft, paddleRight);
+			ball->Update(deltaTime, paddleLeft, paddleRight, hud);
+			hud->Update();
 			window.display();
 		}
 	}
