@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include "DEFINITIONS.h"
 #include "Ball.h"
 #include "Paddle.h"
@@ -13,9 +14,10 @@ private:
 	void Run();
 	sf::RenderWindow window;
 	Ball* ball;
-	Paddle* paddleLeft;
-	Paddle* paddleRight;
+	Paddle* leftPaddle;
+	Paddle* rightPaddle;
 	Hud* hud;
 	sf::Clock clock;
 	bool gameFinished;
+	void CheckFinishCondition();
 };

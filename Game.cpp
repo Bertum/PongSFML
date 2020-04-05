@@ -2,8 +2,8 @@
 
 Game::Game() {
 	window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Pong");
-	paddleLeft = new Paddle(&window, 50, sf::Keyboard::W, sf::Keyboard::S);
-	paddleRight = new Paddle(&window, SCREEN_WIDTH - 50, sf::Keyboard::Up, sf::Keyboard::Down);
+	leftPaddle = new Paddle(&window, 50, sf::Keyboard::W, sf::Keyboard::S);
+	rightPaddle = new Paddle(&window, SCREEN_WIDTH - 50, sf::Keyboard::Up, sf::Keyboard::Down);
 	ball = new Ball(&window);
 	hud = new Hud(&window);
 	gameFinished = false;
@@ -26,11 +26,30 @@ void Game::Run() {
 		window.clear();
 
 		if (!gameFinished) {
-			paddleLeft->Update(deltaTime);
-			paddleRight->Update(deltaTime);
-			ball->Update(deltaTime, paddleLeft, paddleRight, hud);
-			hud->Update();
-			window.display();
+			leftPaddle->Update(deltaTime);
+			rightPaddle->Update(deltaTime);
+			ball->Update(deltaTime, leftPaddle, rightPaddle, hud);
+			CheckFinishCondition();
 		}
+		else
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			{
+				hud->ResetScore();
+				ball->ResetBall();
+				leftPaddle->ResetPosition();
+				rightPaddle->ResetPosition();
+				gameFinished = false;
+			}
+		}
+		hud->Update(gameFinished);
+		window.display();
+	}
+}
+
+void Game::CheckFinishCondition() {
+	if (hud->leftScore >= 5 || hud->rightScore >= 5) {
+		gameFinished = true;
+		hud->CreateWinnerText();
 	}
 }

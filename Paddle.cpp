@@ -1,10 +1,11 @@
 ﻿#include "Paddle.h"
 
 Paddle::Paddle(sf::RenderWindow* renderWindow, float posX, sf::Keyboard::Key upKey, sf::Keyboard::Key downKey) : window(renderWindow), upKeyEnum(upKey), downKeyEnum(downKey) {
-	speed = 500;
+	speed = 1000;
 	rectShape = new sf::RectangleShape(sf::Vector2f(10, SCREEN_HEIGHT / 6));
 	rectShape->setOrigin(rectShape->getGlobalBounds().width / 2, rectShape->getGlobalBounds().height / 2);
 	rectShape->setPosition(posX, SCREEN_HEIGHT / 2);
+	initialPosX = posX;
 }
 
 void Paddle::Update(float deltaTime) {
@@ -23,4 +24,8 @@ void Paddle::Move(float deltaTime) {
 	{
 		rectShape->move(0.f, speed * deltaTime);
 	}
+}
+
+void Paddle::ResetPosition() {
+	rectShape->setPosition(initialPosX, SCREEN_HEIGHT / 2);
 }
