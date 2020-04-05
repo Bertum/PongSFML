@@ -47,7 +47,7 @@ void Ball::ResetBall() {
 
 void Ball::CheckCollisions(Paddle* paddle) {
 	if (this->circleShape->getGlobalBounds().intersects(paddle->rectShape->getGlobalBounds())) {
-		if (speed.x < 600 && speed.x > -600)
+		if (speed.x < 800 && speed.x > -800)
 			speed.x *= -1.5;
 		else
 			speed.x *= -1;
